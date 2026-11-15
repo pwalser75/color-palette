@@ -16,6 +16,7 @@ A browser-only color palette generator built around the OKLCH color model. Pick 
 - Light and dark themes, with the selected theme persisted.
 - Compact mobile layout: editor and preview fit small screens, and all shades stay on one line without horizontal scrolling.
 - Restore default palettes from the empty state.
+- Export the whole collection as an SVG sheet or a CSS file, opened in a new tab.
 
 ## Tech stack
 
@@ -63,6 +64,7 @@ The page URL is kept in sync with the palette set on save, delete, and reorder, 
 3. Click any swatch to copy its hex value.
 4. Save the palette to add it to the collection below.
 5. Edit, delete, or drag palettes to reorder them.
+6. Use **SVG** or **CSS** in the collection header to open an export of all palettes in a new tab.
 
 Sharing the current page URL carries the saved palette list to whoever opens the link. The URL payload is compact CSV (`hue,chroma,lightest,middle,darkest,name`, one palette per line) encoded as URL-safe base64.
 

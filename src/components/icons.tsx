@@ -68,6 +68,24 @@ export function TrashIcon({ className }: IconProps) {
   )
 }
 
+export function ImageIcon({ className }: IconProps) {
+  return (
+    <svg {...baseProps} className={className}>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <circle cx="8.5" cy="9" r="1.5" />
+      <path d="m4 17 5-5 4 4 3-3 4 4" />
+    </svg>
+  )
+}
+
+export function CodeIcon({ className }: IconProps) {
+  return (
+    <svg {...baseProps} className={className}>
+      <path d="m8 9-4 3 4 3M16 9l4 3-4 3" />
+    </svg>
+  )
+}
+
 export function SaveIcon({ className }: IconProps) {
   return (
     <svg {...baseProps} className={className}>

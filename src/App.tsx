@@ -3,6 +3,11 @@ import type { Palette, PaletteDraft, Theme } from './types'
 import { DEFAULT_VALUES, generateSwatches } from './lib/color'
 import { copyText } from './lib/clipboard'
 import { createDefaultPalettes } from './lib/defaultPalettes'
+import {
+  buildPaletteCss,
+  buildPaletteSvg,
+  openExportTab,
+} from './lib/export'
 import { savePalette } from './lib/palette'
 import {
   loadInitialPalettes,
@@ -15,7 +20,12 @@ import { ConfirmDialog } from './components/ConfirmDialog'
 import { PaletteEditor } from './components/PaletteEditor'
 import { PaletteList } from './components/PaletteList'
 import { SwatchStrip } from './components/SwatchStrip'
-import { CheckIcon, TrashIcon } from './components/icons'
+import {
+  CheckIcon,
+  CodeIcon,
+  ImageIcon,
+  TrashIcon,
+} from './components/icons'
 import { ThemeToggle } from './components/ThemeToggle'
 
 interface Feedback {
@@ -95,6 +105,20 @@ export default function App() {
       id: toastCounter.current,
       text: copied ? `Copied ${hex}` : 'Could not copy to clipboard',
     })
+  }
+
+  const handleExportSvg = () => {
+    openExportTab(
+      buildPaletteSvg(palettes),
+      'image/svg+xml;charset=utf-8',
+    )
+  }
+
+  const handleExportCss = () => {
+    openExportTab(
+      buildPaletteCss(palettes),
+      'text/css;charset=utf-8',
+    )
   }
 
   const handleDraftChange = (patch: Partial<PaletteDraft>) => {
@@ -280,14 +304,34 @@ export default function App() {
                 {palettes.length === 1 ? 'palette' : 'palettes'}
               </span>
               {palettes.length > 0 ? (
-                <button
-                  className="subtle-button subtle-button--danger"
-                  type="button"
-                  onClick={() => setPendingAction({ type: 'remove-all' })}
-                >
-                  <TrashIcon className="icon" />
-                  Remove all
-                </button>
+                <>
+                  <button
+                    className="subtle-button"
+                    type="button"
+                    title="Open an SVG of all palettes in a new tab"
+                    onClick={handleExportSvg}
+                  >
+                    <ImageIcon className="icon" />
+                    SVG
+                  </button>
+                  <button
+                    className="subtle-button"
+                    type="button"
+                    title="Open a CSS export of all palettes in a new tab"
+                    onClick={handleExportCss}
+                  >
+                    <CodeIcon className="icon" />
+                    CSS
+                  </button>
+                  <button
+                    className="subtle-button subtle-button--danger"
+                    type="button"
+                    onClick={() => setPendingAction({ type: 'remove-all' })}
+                  >
+                    <TrashIcon className="icon" />
+                    Remove all
+                  </button>
+                </>
               ) : null}
             </div>
           </div>

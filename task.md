@@ -78,6 +78,9 @@ You may look at the files in the `reference` folder to get some ideas.
 - Palette names are trimmed and matched case-insensitively; empty names are rejected.
 - Edit keeps palette identity: saving with the same name updates it, renaming creates a new entry.
 - Palette list supports drag-and-drop reordering with mouse and touch.
+- Collection actions include SVG and CSS exports, opened in a new tab via blob URLs.
+- The SVG export mirrors the reference sheet: palette name, ten swatches, shade numbers and hex values.
+- The CSS export writes `:root` custom properties named `--color-<slug>-<shade>` plus hue, chroma and lightness metadata comments.
 - Remove all clears the entire list after confirmation, allowing an empty starting set.
 - The empty state offers a Restore default palettes action.
 - On small screens (≤600px) the intro copy and "Create a palette" heading are hidden and spacing, type and controls are compacted so the editor and preview stay visible with minimal scrolling.
