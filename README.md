@@ -2,6 +2,8 @@
 
 A browser-only color palette generator built around the OKLCH color model. Pick a hue and chroma, tune the lightness anchors at shades 50, 500 and 900, and get a ten-step palette with a live preview.
 
+![idx Color Palette Generator](screenshot.png)
+
 ## Features
 
 - OKLCH-based palettes with sRGB gamut mapping.
