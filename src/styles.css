@@ -70,6 +70,7 @@
 
 html {
   min-width: 320px;
+  overflow-x: hidden;
   background: var(--bg);
   scroll-behavior: smooth;
 }
@@ -78,6 +79,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -407,6 +409,7 @@ button:not(:disabled) {
   bottom: calc(100% + 9px);
   left: 50%;
   z-index: 20;
+  display: none;
   width: max-content;
   max-width: min(270px, calc(100vw - 48px));
   padding: 9px 11px;
@@ -443,6 +446,7 @@ button:not(:disabled) {
 
 .tooltip-anchor:hover .tooltip-bubble,
 .tooltip-anchor:focus-within .tooltip-bubble {
+  display: block;
   opacity: 1;
   transform: translate(-50%, 0);
   visibility: visible;

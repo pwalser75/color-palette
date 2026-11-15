@@ -87,6 +87,7 @@ You may look at the files in the `reference` folder to get some ideas.
 - On small screens Hue and Chroma each take a full row, while Lightest, Shade 500 and Darkest share a single three-column row.
 - On small screens the swatch strip stays on one line in a ten-column grid without horizontal scrolling; only the shade number is shown, with lightness and RGB hex hidden.
 - On screens ≤720px the palette Edit and Delete actions are icon-only, remain in the top-right of each palette card, and keep a 44×44px touch target.
+- The page never scrolls horizontally on small screens; hidden tooltips are removed from layout and horizontal overflow is clipped.
 - Clicking any swatch copies its hex value to the clipboard and shows a toast.
 
 ## Storage & URL
