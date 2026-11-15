@@ -1,0 +1,1261 @@
+{
+  "meta": {
+    "source": "tailwind-colors.json",
+    "colorSpace": "OKLCH / OKLab (D65)",
+    "shadeCoordinate": "u = i/9, i = 0..9 over shades [50,100,200,300,400,500,600,700,800,900]",
+    "model": {
+      "hue": "h(u) = sum_j h_j * u^j  (degrees; least-squares weighted by chroma)",
+      "lightness": "L(u) = sum_j l_j * u^j  (OKLab L, 0..1)",
+      "chroma": "C(u) = max(0, sum_j c_j * u^j)  (OKLCH C)"
+    },
+    "degrees": {
+      "L": 5,
+      "C": 5,
+      "H": 2
+    },
+    "errorMetric": "deltaE = 100 * Euclidean distance in OKLab (approx. 1 JND ~ 2)"
+  },
+  "families": {
+    "blue-gray": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          229.961775,
+          -4.14883,
+          3.643822
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.950153,
+          -0.496145,
+          -1.922889,
+          5.254651,
+          -5.251542,
+          1.774519
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.004308,
+          0.057516,
+          -0.012122,
+          0.353017,
+          -0.830625,
+          0.447603
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 229.04,
+        "hue_drift_deg": -0.51,
+        "hue_span_deg": 1.18,
+        "lightness_50": 0.9502,
+        "lightness_900": 0.3087,
+        "lightness_span": 0.6414,
+        "chroma_max": 0.0379,
+        "chroma_peak_shade": "500"
+      },
+      "reconstruction": {
+        "50": "#eceff1",
+        "100": "#d0d8dd",
+        "200": "#afbdc4",
+        "300": "#91a5ae",
+        "400": "#77909c",
+        "500": "#627e8b",
+        "600": "#536d79",
+        "700": "#455b65",
+        "800": "#37474e",
+        "900": "#263238"
+      },
+      "error": {
+        "deltaE_mean": 0.222,
+        "deltaE_max": 0.415,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.202,
+          "200": 0.315,
+          "300": 0.325,
+          "400": 0.129,
+          "500": 0.415,
+          "600": 0.348,
+          "700": 0.308,
+          "800": 0.174,
+          "900": 0.0
+        },
+        "exact_hex_matches": 2
+      }
+    },
+    "gray": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": null,
+        "lightness_coefficients_low_to_high_oklab": [
+          0.985134,
+          -0.365958,
+          3.382566,
+          -14.362798,
+          18.084763,
+          -7.477275
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.0,
+          -0.0,
+          0.0,
+          -1e-06,
+          1e-06,
+          -0.0
+        ]
+      },
+      "derived": {
+        "achromatic": true,
+        "hue_reference_deg": null,
+        "hue_drift_deg": null,
+        "hue_span_deg": null,
+        "lightness_50": 0.9851,
+        "lightness_900": 0.2464,
+        "lightness_span": 0.7387,
+        "chroma_max": 0.0,
+        "chroma_peak_shade": null
+      },
+      "reconstruction": {
+        "50": "#fafafa",
+        "100": "#f5f5f5",
+        "200": "#efefef",
+        "300": "#dedede",
+        "400": "#bfbfbf",
+        "500": "#9b9b9b",
+        "600": "#797979",
+        "700": "#5d5d5d",
+        "800": "#444444",
+        "900": "#212121"
+      },
+      "error": {
+        "deltaE_mean": 0.607,
+        "deltaE_max": 1.425,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.0,
+          "200": 0.301,
+          "300": 0.61,
+          "400": 0.629,
+          "500": 0.977,
+          "600": 1.369,
+          "700": 1.425,
+          "800": 0.756,
+          "900": 0.0
+        },
+        "exact_hex_matches": 3
+      }
+    },
+    "brown": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          36.657452,
+          23.132613,
+          -29.266974
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.941988,
+          -0.60358,
+          -2.109555,
+          5.001443,
+          -3.87039,
+          0.939313
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.005321,
+          0.056881,
+          0.078757,
+          0.262501,
+          -0.876561,
+          0.509328
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 38.2,
+        "hue_drift_deg": -6.13,
+        "hue_span_deg": 10.71,
+        "lightness_50": 0.942,
+        "lightness_900": 0.2992,
+        "lightness_span": 0.6428,
+        "chroma_max": 0.0506,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#efebe9",
+        "100": "#d7cdc9",
+        "200": "#bba9a3",
+        "300": "#a2887f",
+        "400": "#8c6d61",
+        "500": "#7b584c",
+        "600": "#6c4a3f",
+        "700": "#5d3f37",
+        "800": "#4e352f",
+        "900": "#3e2723"
+      },
+      "error": {
+        "deltaE_mean": 0.331,
+        "deltaE_max": 0.981,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.253,
+          "200": 0.319,
+          "300": 0.158,
+          "400": 0.395,
+          "500": 0.981,
+          "600": 0.611,
+          "700": 0.299,
+          "800": 0.292,
+          "900": 0.0
+        },
+        "exact_hex_matches": 2
+      }
+    },
+    "deep-orange": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          38.514453,
+          -2.264089,
+          -0.944663
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.948031,
+          -0.473904,
+          -1.21239,
+          3.809755,
+          -3.564411,
+          1.029725
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.020482,
+          0.284616,
+          0.841434,
+          -1.782901,
+          0.720741,
+          0.096396
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 36.58,
+        "hue_drift_deg": -3.21,
+        "hue_span_deg": 3.21,
+        "lightness_50": 0.948,
+        "lightness_900": 0.5368,
+        "lightness_span": 0.4112,
+        "chroma_max": 0.2112,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#fbeae4",
+        "100": "#feccbd",
+        "200": "#ffaa90",
+        "300": "#ff8a66",
+        "400": "#ff6f43",
+        "500": "#fc5a27",
+        "600": "#f54f17",
+        "700": "#e84a17",
+        "800": "#d64419",
+        "900": "#c0360b"
+      },
+      "error": {
+        "deltaE_mean": 0.326,
+        "deltaE_max": 0.631,
+        "deltaE_by_shade": {
+          "50": 0.549,
+          "100": 0.191,
+          "200": 0.232,
+          "300": 0.112,
+          "400": 0.199,
+          "500": 0.631,
+          "600": 0.364,
+          "700": 0.389,
+          "800": 0.391,
+          "900": 0.202
+        },
+        "exact_hex_matches": 0
+      }
+    },
+    "orange": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          80.767655,
+          -14.75678,
+          -25.55288
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.968559,
+          -0.375308,
+          -0.675599,
+          2.447922,
+          -2.596993,
+          0.862886
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.028177,
+          0.297726,
+          0.90359,
+          -3.231945,
+          3.283571,
+          -1.084176
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 60.34,
+        "hue_drift_deg": -40.31,
+        "hue_span_deg": 40.31,
+        "lightness_50": 0.9686,
+        "lightness_900": 0.6315,
+        "lightness_span": 0.3371,
+        "chroma_max": 0.1969,
+        "chroma_peak_shade": "900"
+      },
+      "reconstruction": {
+        "50": "#fff3e0",
+        "100": "#fee0b2",
+        "200": "#ffcb7f",
+        "300": "#ffb750",
+        "400": "#ffa625",
+        "500": "#fe9800",
+        "600": "#fb8c00",
+        "700": "#f67d04",
+        "800": "#ef6b04",
+        "900": "#e65100"
+      },
+      "error": {
+        "deltaE_mean": 0.156,
+        "deltaE_max": 0.299,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.143,
+          "200": 0.238,
+          "300": 0.235,
+          "400": 0.227,
+          "500": 0.172,
+          "600": 0.0,
+          "700": 0.299,
+          "800": 0.243,
+          "900": 0.0
+        },
+        "exact_hex_matches": 3
+      }
+    },
+    "amber": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          88.347449,
+          34.84966,
+          -76.494934
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.978778,
+          -0.321236,
+          0.030028,
+          0.564402,
+          -0.856508,
+          0.312831
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.030984,
+          0.337784,
+          0.921786,
+          -3.682428,
+          3.872946,
+          -1.283854
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 75.98,
+        "hue_drift_deg": -41.65,
+        "hue_span_deg": 45.61,
+        "lightness_50": 0.9788,
+        "lightness_900": 0.7083,
+        "lightness_span": 0.2705,
+        "chroma_max": 0.1972,
+        "chroma_peak_shade": "900"
+      },
+      "reconstruction": {
+        "50": "#fff7e1",
+        "100": "#ffecb3",
+        "200": "#ffe081",
+        "300": "#fed652",
+        "400": "#ffcb27",
+        "500": "#ffbf00",
+        "600": "#ffb200",
+        "700": "#ffa207",
+        "800": "#ff8d00",
+        "900": "#ff7000"
+      },
+      "error": {
+        "deltaE_mean": 0.269,
+        "deltaE_max": 0.467,
+        "deltaE_by_shade": {
+          "50": 0.258,
+          "100": 0.0,
+          "200": 0.104,
+          "300": 0.277,
+          "400": 0.26,
+          "500": 0.467,
+          "600": 0.24,
+          "700": 0.445,
+          "800": 0.445,
+          "900": 0.196
+        },
+        "exact_hex_matches": 1
+      }
+    },
+    "yellow": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          88.784297,
+          91.807222,
+          -125.684511
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.990456,
+          -0.18178,
+          0.082261,
+          0.772391,
+          -1.816408,
+          0.871696
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.029016,
+          0.291961,
+          0.693927,
+          -1.944047,
+          1.071976,
+          0.032486
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 89.99,
+        "hue_drift_deg": -33.88,
+        "hue_span_deg": 50.64,
+        "lightness_50": 0.9905,
+        "lightness_900": 0.7186,
+        "lightness_span": 0.2718,
+        "chroma_max": 0.176,
+        "chroma_peak_shade": "500"
+      },
+      "reconstruction": {
+        "50": "#fffbe6",
+        "100": "#fff7c3",
+        "200": "#fff59d",
+        "300": "#fcf479",
+        "400": "#fcf058",
+        "500": "#ffe73e",
+        "600": "#ffd830",
+        "700": "#fec22e",
+        "800": "#f8a528",
+        "900": "#f5800d"
+      },
+      "error": {
+        "deltaE_mean": 0.567,
+        "deltaE_max": 1.056,
+        "deltaE_by_shade": {
+          "50": 0.485,
+          "100": 0.486,
+          "200": 0.0,
+          "300": 0.768,
+          "400": 0.628,
+          "500": 1.056,
+          "600": 0.33,
+          "700": 0.71,
+          "800": 0.799,
+          "900": 0.402
+        },
+        "exact_hex_matches": 1
+      }
+    },
+    "lime": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          106.925933,
+          34.809722,
+          -37.729148
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.981806,
+          -0.292271,
+          0.050451,
+          0.640348,
+          -1.28218,
+          0.465795
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.026552,
+          0.256754,
+          0.892155,
+          -2.549812,
+          2.017345,
+          -0.532228
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 111.92,
+        "hue_drift_deg": -2.92,
+        "hue_span_deg": 10.95,
+        "lightness_50": 0.9818,
+        "lightness_900": 0.5639,
+        "lightness_span": 0.4179,
+        "chroma_max": 0.1715,
+        "chroma_peak_shade": "500"
+      },
+      "reconstruction": {
+        "50": "#fbfbe6",
+        "100": "#f0f3c3",
+        "200": "#e6ee9b",
+        "300": "#dce976",
+        "400": "#d3e256",
+        "500": "#cbd93e",
+        "600": "#c1cb2f",
+        "700": "#b2b629",
+        "800": "#9d9b24",
+        "900": "#817818"
+      },
+      "error": {
+        "deltaE_mean": 0.443,
+        "deltaE_max": 0.949,
+        "deltaE_by_shade": {
+          "50": 0.278,
+          "100": 0.261,
+          "200": 0.115,
+          "300": 0.501,
+          "400": 0.321,
+          "500": 0.949,
+          "600": 0.394,
+          "700": 0.732,
+          "800": 0.582,
+          "900": 0.297
+        },
+        "exact_hex_matches": 0
+      }
+    },
+    "light-green": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          129.00543,
+          -5.277069,
+          13.808973
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.970365,
+          -0.408949,
+          -0.348335,
+          1.345981,
+          -1.414893,
+          0.323904
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.021555,
+          0.205688,
+          0.659518,
+          -1.388903,
+          0.542774,
+          0.081316
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 131.67,
+        "hue_drift_deg": 8.53,
+        "hue_span_deg": 9.04,
+        "lightness_50": 0.9704,
+        "lightness_900": 0.4681,
+        "lightness_span": 0.5023,
+        "chroma_max": 0.1592,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#f1f8e9",
+        "100": "#dbecc9",
+        "200": "#c5e1a4",
+        "300": "#afd681",
+        "400": "#9ccc63",
+        "500": "#8bc14d",
+        "600": "#7bb340",
+        "700": "#69a239",
+        "800": "#538930",
+        "900": "#35691c"
+      },
+      "error": {
+        "deltaE_mean": 0.369,
+        "deltaE_max": 0.875,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.361,
+          "200": 0.126,
+          "300": 0.312,
+          "400": 0.204,
+          "500": 0.68,
+          "600": 0.225,
+          "700": 0.875,
+          "800": 0.685,
+          "900": 0.219
+        },
+        "exact_hex_matches": 1
+      }
+    },
+    "green": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          147.321613,
+          -8.066416,
+          5.068879
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.957682,
+          -0.552428,
+          -0.321898,
+          1.064459,
+          -0.586388,
+          -0.134954
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.021553,
+          0.160545,
+          0.948846,
+          -2.074669,
+          1.244433,
+          -0.184026
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 144.67,
+        "hue_drift_deg": -3.0,
+        "hue_span_deg": 3.21,
+        "lightness_50": 0.9577,
+        "lightness_900": 0.4265,
+        "lightness_span": 0.5312,
+        "chroma_max": 0.1584,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#e8f5e9",
+        "100": "#c8e5ca",
+        "200": "#a4d6a6",
+        "300": "#82c885",
+        "400": "#65bb68",
+        "500": "#4fae53",
+        "600": "#41a045",
+        "700": "#38903c",
+        "800": "#2f7b32",
+        "900": "#1b5e20"
+      },
+      "error": {
+        "deltaE_mean": 0.319,
+        "deltaE_max": 0.617,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.34,
+          "200": 0.19,
+          "300": 0.312,
+          "400": 0.273,
+          "500": 0.56,
+          "600": 0.286,
+          "700": 0.609,
+          "800": 0.617,
+          "900": 0.0
+        },
+        "exact_hex_matches": 2
+      }
+    },
+    "teal": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          190.908246,
+          -12.048909,
+          -1.165812
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.947728,
+          -0.630484,
+          -0.812796,
+          2.400209,
+          -1.710909,
+          0.182434
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.019137,
+          0.185067,
+          0.864578,
+          -3.129712,
+          3.359049,
+          -1.228064
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 183.78,
+        "hue_drift_deg": -13.21,
+        "hue_span_deg": 13.21,
+        "lightness_50": 0.9477,
+        "lightness_900": 0.3762,
+        "lightness_span": 0.5715,
+        "chroma_max": 0.1082,
+        "chroma_peak_shade": "400"
+      },
+      "reconstruction": {
+        "50": "#e0f2f1",
+        "100": "#b2dfdb",
+        "200": "#7fcbc4",
+        "300": "#4fb7ad",
+        "400": "#25a599",
+        "500": "#009689",
+        "600": "#00887a",
+        "700": "#037a6c",
+        "800": "#01685a",
+        "900": "#004d41"
+      },
+      "error": {
+        "deltaE_mean": 0.211,
+        "deltaE_max": 0.382,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.0,
+          "200": 0.098,
+          "300": 0.348,
+          "400": 0.308,
+          "500": 0.155,
+          "600": 0.307,
+          "700": 0.339,
+          "800": 0.382,
+          "900": 0.172
+        },
+        "exact_hex_matches": 2
+      }
+    },
+    "cyan": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          199.770903,
+          37.956599,
+          -35.753651
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.960869,
+          -0.502204,
+          -0.48606,
+          2.453091,
+          -2.947937,
+          0.96831
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.02452,
+          0.261066,
+          0.645953,
+          -2.723632,
+          2.938531,
+          -1.070671
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 207.35,
+        "hue_drift_deg": 2.2,
+        "hue_span_deg": 10.07,
+        "lightness_50": 0.9609,
+        "lightness_900": 0.4461,
+        "lightness_span": 0.5148,
+        "chroma_max": 0.1263,
+        "chroma_peak_shade": "500"
+      },
+      "reconstruction": {
+        "50": "#e0f7f8",
+        "100": "#b2ebf0",
+        "200": "#7fdeea",
+        "300": "#50d1e4",
+        "400": "#25c6dc",
+        "500": "#00bad0",
+        "600": "#00acc0",
+        "700": "#029aaa",
+        "800": "#00818c",
+        "900": "#006066"
+      },
+      "error": {
+        "deltaE_mean": 0.425,
+        "deltaE_max": 0.908,
+        "deltaE_by_shade": {
+          "50": 0.273,
+          "100": 0.28,
+          "200": 0.087,
+          "300": 0.524,
+          "400": 0.295,
+          "500": 0.714,
+          "600": 0.153,
+          "700": 0.908,
+          "800": 0.675,
+          "900": 0.34
+        },
+        "exact_hex_matches": 0
+      }
+    },
+    "light-blue": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          224.283022,
+          22.169752,
+          3.592336
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.958683,
+          -0.564899,
+          -0.432737,
+          2.173118,
+          -2.351062,
+          0.67024
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.024421,
+          0.279638,
+          0.571724,
+          -1.986823,
+          1.728666,
+          -0.486494
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 238.84,
+        "hue_drift_deg": 25.76,
+        "hue_span_deg": 25.76,
+        "lightness_50": 0.9587,
+        "lightness_900": 0.4533,
+        "lightness_span": 0.5053,
+        "chroma_max": 0.1551,
+        "chroma_peak_shade": "500"
+      },
+      "reconstruction": {
+        "50": "#e1f5fe",
+        "100": "#b2e5fb",
+        "200": "#81d4fa",
+        "300": "#52c4f9",
+        "400": "#27b6f7",
+        "500": "#00a8f0",
+        "600": "#009be5",
+        "700": "#0b8ad4",
+        "800": "#0d75bb",
+        "900": "#00589b"
+      },
+      "error": {
+        "deltaE_mean": 0.303,
+        "deltaE_max": 0.719,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.191,
+          "200": 0.0,
+          "300": 0.44,
+          "400": 0.155,
+          "500": 0.619,
+          "600": 0.042,
+          "700": 0.719,
+          "800": 0.582,
+          "900": 0.285
+        },
+        "exact_hex_matches": 2
+      }
+    },
+    "blue": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          242.099554,
+          4.338147,
+          13.051671
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.953422,
+          -0.567494,
+          -0.701003,
+          2.460266,
+          -2.273678,
+          0.551113
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.022118,
+          0.228689,
+          0.637502,
+          -1.452922,
+          0.705974,
+          0.016088
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 250.5,
+        "hue_drift_deg": 17.39,
+        "hue_span_deg": 17.39,
+        "lightness_50": 0.9534,
+        "lightness_900": 0.4226,
+        "lightness_span": 0.5308,
+        "chroma_max": 0.169,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#e3f2fe",
+        "100": "#bbdefa",
+        "200": "#8fc9f9",
+        "300": "#65b6f8",
+        "400": "#40a5f5",
+        "500": "#2596f0",
+        "600": "#1987e6",
+        "700": "#1a78d5",
+        "800": "#1964be",
+        "900": "#0a47a1"
+      },
+      "error": {
+        "deltaE_mean": 0.313,
+        "deltaE_max": 0.679,
+        "deltaE_by_shade": {
+          "50": 0.138,
+          "100": 0.142,
+          "200": 0.305,
+          "300": 0.379,
+          "400": 0.124,
+          "500": 0.46,
+          "600": 0.393,
+          "700": 0.679,
+          "800": 0.388,
+          "900": 0.117
+        },
+        "exact_hex_matches": 0
+      }
+    },
+    "indigo": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          280.393446,
+          -20.69289,
+          10.92025
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.938577,
+          -0.711457,
+          -1.329404,
+          2.528424,
+          -0.487377,
+          -0.618613
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.016743,
+          0.186412,
+          0.416974,
+          -0.344503,
+          -0.722021,
+          0.598101
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 272.48,
+        "hue_drift_deg": -9.77,
+        "hue_span_deg": 9.8,
+        "lightness_50": 0.9386,
+        "lightness_900": 0.3201,
+        "lightness_span": 0.6184,
+        "chroma_max": 0.1606,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#e8eaf6",
+        "100": "#c6cbe9",
+        "200": "#9ea8da",
+        "300": "#7986cc",
+        "400": "#5a6abf",
+        "500": "#4454b5",
+        "600": "#3747ab",
+        "700": "#2f3fa0",
+        "800": "#283692",
+        "900": "#1b227e"
+      },
+      "error": {
+        "deltaE_mean": 0.339,
+        "deltaE_max": 1.071,
+        "deltaE_by_shade": {
+          "50": 0.0,
+          "100": 0.31,
+          "200": 0.134,
+          "300": 0.153,
+          "400": 0.42,
+          "500": 1.071,
+          "600": 0.596,
+          "700": 0.201,
+          "800": 0.29,
+          "900": 0.217
+        },
+        "exact_hex_matches": 1
+      }
+    },
+    "deep-purple": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          300.907572,
+          2.840125,
+          -22.996154
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.93647,
+          -0.660103,
+          -1.947226,
+          4.350723,
+          -2.534767,
+          0.201661
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.021432,
+          0.168622,
+          1.151345,
+          -2.471056,
+          1.547021,
+          -0.238137
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 292.27,
+        "hue_drift_deg": -20.16,
+        "hue_span_deg": 20.24,
+        "lightness_50": 0.9365,
+        "lightness_900": 0.3468,
+        "lightness_span": 0.5897,
+        "chroma_max": 0.1877,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#ece7f7",
+        "100": "#d1c5e9",
+        "200": "#b29cdb",
+        "300": "#9575cd",
+        "400": "#7d55c1",
+        "500": "#6a3eb8",
+        "600": "#5c32b0",
+        "700": "#512da9",
+        "800": "#4429a0",
+        "900": "#321a92"
+      },
+      "error": {
+        "deltaE_mean": 0.378,
+        "deltaE_max": 1.029,
+        "deltaE_by_shade": {
+          "50": 0.183,
+          "100": 0.261,
+          "200": 0.315,
+          "300": 0.0,
+          "400": 0.518,
+          "500": 1.029,
+          "600": 0.731,
+          "700": 0.163,
+          "800": 0.369,
+          "900": 0.21
+        },
+        "exact_hex_matches": 1
+      }
+    },
+    "purple": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          313.354604,
+          49.892606,
+          -65.1671
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.937421,
+          -0.685529,
+          -1.778447,
+          4.875679,
+          -3.8811,
+          0.892199
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.02648,
+          0.23384,
+          1.483451,
+          -3.777591,
+          2.990313,
+          -0.779415
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 315.45,
+        "hue_drift_deg": -15.27,
+        "hue_span_deg": 24.82,
+        "lightness_50": 0.9374,
+        "lightness_900": 0.3602,
+        "lightness_span": 0.5772,
+        "chroma_max": 0.2119,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#f1e5f7",
+        "100": "#dfbfe9",
+        "200": "#cd92d8",
+        "300": "#bc68c7",
+        "400": "#ac45ba",
+        "500": "#9c2cb0",
+        "600": "#8d20aa",
+        "700": "#7c1fa4",
+        "800": "#671e9b",
+        "900": "#4c128b"
+      },
+      "error": {
+        "deltaE_mean": 0.474,
+        "deltaE_max": 0.723,
+        "deltaE_by_shade": {
+          "50": 0.369,
+          "100": 0.399,
+          "200": 0.312,
+          "300": 0.392,
+          "400": 0.463,
+          "500": 0.643,
+          "600": 0.552,
+          "700": 0.368,
+          "800": 0.723,
+          "900": 0.514
+        },
+        "exact_hex_matches": 0
+      }
+    },
+    "pink": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          -15.296737,
+          79.246978,
+          -67.239966
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.940737,
+          -0.693475,
+          -1.386314,
+          5.346786,
+          -5.685678,
+          1.894101
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.028822,
+          0.24476,
+          1.844435,
+          -4.931504,
+          4.219828,
+          -1.245013
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 3.56,
+        "hue_drift_deg": 12.01,
+        "hue_span_deg": 23.35,
+        "lightness_50": 0.9407,
+        "lightness_900": 0.4162,
+        "lightness_span": 0.5246,
+        "chroma_max": 0.2249,
+        "chroma_peak_shade": "500"
+      },
+      "reconstruction": {
+        "50": "#fbe4f0",
+        "100": "#f6bcd3",
+        "200": "#f48eb0",
+        "300": "#f26390",
+        "400": "#ed3f76",
+        "500": "#e52367",
+        "600": "#d81760",
+        "700": "#c5175c",
+        "800": "#aa1657",
+        "900": "#890d4e"
+      },
+      "error": {
+        "deltaE_mean": 0.51,
+        "deltaE_max": 0.915,
+        "deltaE_by_shade": {
+          "50": 0.552,
+          "100": 0.479,
+          "200": 0.229,
+          "300": 0.581,
+          "400": 0.582,
+          "500": 0.915,
+          "600": 0.276,
+          "700": 0.612,
+          "800": 0.602,
+          "900": 0.27
+        },
+        "exact_hex_matches": 0
+      }
+    },
+    "red": {
+      "fitted": {
+        "hue_coefficients_low_to_high_deg": [
+          9.922539,
+          47.886925,
+          -31.6532
+        ],
+        "lightness_coefficients_low_to_high_oklab": [
+          0.959139,
+          -0.204137,
+          -5.993709,
+          18.867008,
+          -21.368944,
+          8.245151
+        ],
+        "chroma_coefficients_low_to_high_oklch": [
+          0.022915,
+          0.169729,
+          1.269672,
+          -2.099556,
+          0.403109,
+          0.424038
+        ]
+      },
+      "derived": {
+        "achromatic": false,
+        "hue_reference_deg": 25.11,
+        "hue_drift_deg": 16.23,
+        "hue_span_deg": 18.11,
+        "lightness_50": 0.9591,
+        "lightness_900": 0.5045,
+        "lightness_span": 0.4546,
+        "chroma_max": 0.2144,
+        "chroma_peak_shade": "600"
+      },
+      "reconstruction": {
+        "50": "#ffecee",
+        "100": "#fbcbce",
+        "200": "#f09c9d",
+        "300": "#eb7271",
+        "400": "#ec5451",
+        "500": "#ee413d",
+        "600": "#e93831",
+        "700": "#d8322b",
+        "800": "#c02724",
+        "900": "#b81b21"
+      },
+      "error": {
+        "deltaE_mean": 0.869,
+        "deltaE_max": 1.464,
+        "deltaE_by_shade": {
+          "50": 0.256,
+          "100": 0.915,
+          "200": 0.568,
+          "300": 1.064,
+          "400": 0.548,
+          "500": 1.464,
+          "600": 0.816,
+          "700": 1.26,
+          "800": 1.313,
+          "900": 0.487
+        },
+        "exact_hex_matches": 0
+      }
+    }
+  },
+  "summary": {
+    "families": 19,
+    "shades": 190,
+    "deltaE_mean": 0.391,
+    "deltaE_median": 0.314,
+    "deltaE_max": 1.464,
+    "under_1.0": 181,
+    "under_2.0_JND": 190,
+    "exact_hex_matches": 21
+  }
+}
