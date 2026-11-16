@@ -46,6 +46,21 @@ function createDefaultDraft(): PaletteDraft {
   return { name: '', ...DEFAULT_VALUES }
 }
 
+function paletteToDraft(palette: Palette): PaletteDraft {
+  return {
+    name: palette.name,
+    hue: palette.hue,
+    chroma: palette.chroma,
+    shade500: palette.shade500,
+    lightest: palette.lightest,
+    lightestChromaBoost: palette.lightestChromaBoost,
+    lightestHueShift: palette.lightestHueShift,
+    darkest: palette.darkest,
+    darkestChromaBoost: palette.darkestChromaBoost,
+    darkestHueShift: palette.darkestHueShift,
+  }
+}
+
 export default function App() {
   const [palettes, setPalettes] = useState<Palette[]>(loadInitialPalettes)
   const [theme, setTheme] = useState<Theme>(loadTheme)
@@ -126,6 +141,23 @@ export default function App() {
     setFeedback(null)
   }
 
+  const handleResetValues = () => {
+    const stored = editingId
+      ? palettes.find((palette) => palette.id === editingId)
+      : undefined
+
+    if (stored) {
+      setDraft((current) => ({
+        ...paletteToDraft(stored),
+        name: current.name,
+      }))
+      setFeedback(null)
+      return
+    }
+
+    handleDraftChange(DEFAULT_VALUES)
+  }
+
   const handleSave = () => {
     const result = savePalette(palettes, draft)
 
@@ -138,14 +170,7 @@ export default function App() {
     }
 
     setPalettes(result.palettes)
-    setDraft({
-      name: result.saved.name,
-      hue: result.saved.hue,
-      chroma: result.saved.chroma,
-      lightest: result.saved.lightest,
-      middle: result.saved.middle,
-      darkest: result.saved.darkest,
-    })
+    setDraft(paletteToDraft(result.saved))
     setEditingId(result.saved.id)
     setFeedback({
       type: 'success',
@@ -165,14 +190,7 @@ export default function App() {
   }
 
   const handleEdit = (palette: Palette) => {
-    setDraft({
-      name: palette.name,
-      hue: palette.hue,
-      chroma: palette.chroma,
-      lightest: palette.lightest,
-      middle: palette.middle,
-      darkest: palette.darkest,
-    })
+    setDraft(paletteToDraft(palette))
     setEditingId(palette.id)
     setFeedback(null)
     window.requestAnimationFrame(() => {
@@ -269,6 +287,7 @@ export default function App() {
             onChange={handleDraftChange}
             onSave={handleSave}
             onNew={handleNew}
+            onReset={handleResetValues}
           />
 
           <div className="card preview-card">
@@ -280,7 +299,9 @@ export default function App() {
               <div className="value-chips" aria-label="Palette values">
                 <span>H {Math.round(draft.hue)}°</span>
                 <span>C {draft.chroma.toFixed(3)}</span>
-                <span>L {Math.round(draft.lightest * 100)}/{Math.round(draft.middle * 100)}/{Math.round(draft.darkest * 100)}%</span>
+                <span>L {Math.round(draft.lightest * 100)}/{Math.round(draft.shade500 * 100)}/{Math.round(draft.darkest * 100)}%</span>
+                <span>50 C×{draft.lightestChromaBoost.toFixed(2)} H{draft.lightestHueShift >= 0 ? '+' : ''}{draft.lightestHueShift}°</span>
+                <span>900 C×{draft.darkestChromaBoost.toFixed(2)} H{draft.darkestHueShift >= 0 ? '+' : ''}{draft.darkestHueShift}°</span>
               </div>
             </div>
 

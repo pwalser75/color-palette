@@ -42,12 +42,36 @@ describe('createDefaultPalettes', () => {
       expect(palette.chroma).toBeLessThanOrEqual(LIMITS.chroma.max)
       expect(palette.lightest).toBeGreaterThanOrEqual(LIMITS.lightest.min)
       expect(palette.lightest).toBeLessThanOrEqual(LIMITS.lightest.max)
-      expect(palette.middle).toBeGreaterThan(palette.darkest)
-      expect(palette.middle).toBeLessThan(palette.lightest)
-      expect(palette.middle).toBeGreaterThanOrEqual(LIMITS.middle.min)
-      expect(palette.middle).toBeLessThanOrEqual(LIMITS.middle.max)
+      expect(palette.lightestChromaBoost).toBeGreaterThanOrEqual(
+        LIMITS.lightestChromaBoost.min,
+      )
+      expect(palette.lightestChromaBoost).toBeLessThanOrEqual(
+        LIMITS.lightestChromaBoost.max,
+      )
+      expect(palette.lightestHueShift).toBeGreaterThanOrEqual(
+        LIMITS.lightestHueShift.min,
+      )
+      expect(palette.lightestHueShift).toBeLessThanOrEqual(
+        LIMITS.lightestHueShift.max,
+      )
+      expect(palette.shade500).toBeGreaterThan(palette.darkest)
+      expect(palette.shade500).toBeLessThan(palette.lightest)
+      expect(palette.shade500).toBeGreaterThanOrEqual(LIMITS.shade500.min)
+      expect(palette.shade500).toBeLessThanOrEqual(LIMITS.shade500.max)
       expect(palette.darkest).toBeGreaterThanOrEqual(LIMITS.darkest.min)
       expect(palette.darkest).toBeLessThanOrEqual(LIMITS.darkest.max)
+      expect(palette.darkestChromaBoost).toBeGreaterThanOrEqual(
+        LIMITS.darkestChromaBoost.min,
+      )
+      expect(palette.darkestChromaBoost).toBeLessThanOrEqual(
+        LIMITS.darkestChromaBoost.max,
+      )
+      expect(palette.darkestHueShift).toBeGreaterThanOrEqual(
+        LIMITS.darkestHueShift.min,
+      )
+      expect(palette.darkestHueShift).toBeLessThanOrEqual(
+        LIMITS.darkestHueShift.max,
+      )
     }
   })
 

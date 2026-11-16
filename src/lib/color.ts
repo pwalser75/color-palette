@@ -1,27 +1,30 @@
 import { clampChroma, formatHex, oklch } from 'culori'
-import type { Palette, Swatch } from '../types'
-import { hueDriftAt } from './hueDrift'
+import type { PaletteValues, Swatch } from '../types'
 
 export const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const
-
-export const CHROMA_PROFILE = [
-  0.1345, 0.3392, 0.5573, 0.7615, 0.9001, 1, 0.96, 0.9117, 0.867, 0.8148,
-] as const
 
 export const DEFAULT_VALUES = {
   hue: 220,
   chroma: 0.12,
+  shade500: 0.55,
   lightest: 0.97,
-  middle: 0.55,
+  lightestChromaBoost: 0.15,
+  lightestHueShift: 0,
   darkest: 0.22,
+  darkestChromaBoost: 0.8,
+  darkestHueShift: 0,
 } as const
 
 export const LIMITS = {
   hue: { min: 0, max: 360, step: 1 },
   chroma: { min: 0, max: 0.4, step: 0.005 },
+  shade500: { min: 0.08, max: 0.99, step: 0.005 },
   lightest: { min: 0.9, max: 0.99, step: 0.005 },
-  middle: { min: 0.08, max: 0.99, step: 0.005 },
+  lightestChromaBoost: { min: 0, max: 5, step: 0.05 },
+  lightestHueShift: { min: -45, max: 45, step: 1 },
   darkest: { min: 0.08, max: 0.8, step: 0.005 },
+  darkestChromaBoost: { min: 0, max: 5, step: 0.05 },
+  darkestHueShift: { min: -45, max: 45, step: 1 },
 } as const
 
 export function clampValue(value: number, min: number, max: number): number {
@@ -104,26 +107,60 @@ function pchip(anchors: [number, number][], x: number): number {
 export function lightnessForShade(
   index: number,
   lightest: number,
-  middle: number,
+  shade500: number,
   darkest: number,
 ): number {
   const t = index / (SHADES.length - 1)
   return pchip(
     [
       [0, lightest],
-      [5 / 9, middle],
+      [5 / 9, shade500],
       [1, darkest],
     ],
     t,
   )
 }
 
-export function generateSwatches(
-  palette: Pick<
-    Palette,
-    'hue' | 'chroma' | 'lightest' | 'middle' | 'darkest'
-  >,
-): Swatch[] {
+export function chromaForShade(
+  index: number,
+  chroma: number,
+  lightestChromaBoost: number,
+  darkestChromaBoost: number,
+): number {
+  const t = index / (SHADES.length - 1)
+  return Math.max(
+    0,
+    pchip(
+      [
+        [0, chroma * lightestChromaBoost],
+        [5 / 9, chroma],
+        [1, chroma * darkestChromaBoost],
+      ],
+      t,
+    ),
+  )
+}
+
+export function hueForShade(
+  index: number,
+  hue: number,
+  lightestHueShift: number,
+  darkestHueShift: number,
+): number {
+  const t = index / (SHADES.length - 1)
+  return normalizeHue(
+    pchip(
+      [
+        [0, hue + lightestHueShift],
+        [5 / 9, hue],
+        [1, hue + darkestHueShift],
+      ],
+      t,
+    ),
+  )
+}
+
+export function generateSwatches(palette: PaletteValues): Swatch[] {
   const hue = normalizeHue(palette.hue)
   const chroma = clampValue(
     palette.chroma,
@@ -140,20 +177,44 @@ export function generateSwatches(
     LIMITS.darkest.min,
     LIMITS.darkest.max,
   )
-  const middle = clampValue(
-    palette.middle,
-    Math.max(LIMITS.middle.min, darkest + 0.005),
-    Math.min(LIMITS.middle.max, lightest - 0.005),
+  const shade500 = clampValue(
+    palette.shade500,
+    Math.max(LIMITS.shade500.min, darkest + 0.005),
+    Math.min(LIMITS.shade500.max, lightest - 0.005),
+  )
+  const lightestChromaBoost = clampValue(
+    palette.lightestChromaBoost,
+    LIMITS.lightestChromaBoost.min,
+    LIMITS.lightestChromaBoost.max,
+  )
+  const darkestChromaBoost = clampValue(
+    palette.darkestChromaBoost,
+    LIMITS.darkestChromaBoost.min,
+    LIMITS.darkestChromaBoost.max,
+  )
+  const lightestHueShift = clampValue(
+    palette.lightestHueShift,
+    LIMITS.lightestHueShift.min,
+    LIMITS.lightestHueShift.max,
+  )
+  const darkestHueShift = clampValue(
+    palette.darkestHueShift,
+    LIMITS.darkestHueShift.min,
+    LIMITS.darkestHueShift.max,
   )
 
   return SHADES.map((shade, index) => {
-    const t = index / (SHADES.length - 1)
-    const lightness = lightnessForShade(index, lightest, middle, darkest)
+    const lightness = lightnessForShade(index, lightest, shade500, darkest)
     const raw = oklch({
       mode: 'oklch',
       l: lightness,
-      c: chroma * CHROMA_PROFILE[index],
-      h: normalizeHue(hue + hueDriftAt(hue, t)),
+      c: chromaForShade(
+        index,
+        chroma,
+        lightestChromaBoost,
+        darkestChromaBoost,
+      ),
+      h: hueForShade(index, hue, lightestHueShift, darkestHueShift),
     })
     const inGamut = clampChroma(raw, 'oklch', 'rgb')
 

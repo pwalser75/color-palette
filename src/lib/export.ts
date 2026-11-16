@@ -100,7 +100,7 @@ export function buildPaletteCss(palettes: Palette[]): string {
     }
 
     lines.push(
-      `  /* ${escapeCssComment(palette.name)} — hue ${Math.round(palette.hue)}°, chroma ${palette.chroma}, L ${Math.round(palette.lightest * 100)}/${Math.round(palette.middle * 100)}/${Math.round(palette.darkest * 100)}% */`,
+      `  /* ${escapeCssComment(palette.name)} — hue ${Math.round(palette.hue)}°, chroma ${palette.chroma}, L ${Math.round(palette.lightest * 100)}/${Math.round(palette.shade500 * 100)}/${Math.round(palette.darkest * 100)}% */`,
     )
 
     for (const swatch of generateSwatches(palette)) {

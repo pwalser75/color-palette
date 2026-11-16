@@ -16,20 +16,22 @@ Palette editor:
 - Text field for the color name
 - Slider and text input for the Hue value, from 0° to 360°
 - Slider and text input for the Chroma value
-- Sliders and text inputs for the Lightest shade (shade 50), Shade 500 (primary ramp control) and Darkest shade (shade 900)
+- Slider and text input for Shade 500 lightness (primary ramp control)
+- For the Lightest shade (shade 50): sliders and text inputs for lightness, chroma boost (0–5, factor applied to the base chroma) and hue shift (−45°–45°)
+- For the Darkest shade (shade 900): sliders and text inputs for lightness, chroma boost (0–5, factor applied to the base chroma) and hue shift (−45°–45°)
 
 Preview:
-Generated palette, updated in realtime. Lightness is interpolated monotonically through the shade 50, 500 and 900 anchors, while hidden hue drift and chroma taper shape the remaining shades.
+Generated palette, updated in realtime. Lightness, chroma and hue are interpolated smoothly through the shade 50, 500 and 900 anchors.
 Horizontally distributed boxes with each color value, with a text underneath with the shade number, lightness value and the RGB hex color.
 It should look like the `references/screenshot.png`.
 
 Actions: Save to add it to the palettes (would overwrite an existing entry with the same name).
-A palette is stored with the name, hue, chroma, lightest shade, shade 500 lightness and darkest shade values.
+A palette is stored with the name, hue, base chroma, shade 500 lightness, and the lightness, chroma boost and hue shift for the lightest and darkest shades.
 Palettes are stored in the local storage, and loaded on start.
 
 Palettes: List of palettes, like the `references/screenshot.png`.
 - Name of the palette
-- Values of the Hue, Chroma, Lightest, Shade 500 and Darkest
+- Values of the Hue, Chroma, Shade 500 and the lightness, chroma boost and hue shift of the lightest and darkest shades
 - Shades with color, like in the preview.
 - Actions: Edit (opens a copy of it in the palette editor), Delete (removes it from the list).
 - The items in the list can be reordered with drag&drop.
@@ -61,17 +63,19 @@ You may look at the files in the `reference` folder to get some ideas.
 ## Color Model
 - Shades: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900.
 - Shade coordinate t = i / 9 for i = 0..9.
-- Lightness: monotone PCHIP through the shade 50, 500 and 900 anchors, so L(t) always passes through lightest, middle and darkest.
-- Lightest shade range: 0.90–0.99 (default 0.97). Middle range: 0.08–0.99, clamped between the endpoints (default 0.55). Darkest range: 0.08–0.80 (default 0.22), allowing bright palettes to keep a lighter 900 shade like the reference.
-- Hue uses a hidden quadratic drift: h(t) = h500 + k1·u + k2·u², with u = t − 5/9. The coefficients are stored per reference hue anchor and interpolated by base hue.
-- Chroma is interpreted as the chroma of shade 500 and tapers toward both ends using the normalized profile [0.1345, 0.3392, 0.5573, 0.7615, 0.9001, 1.000, 0.960, 0.9117, 0.867, 0.8148].
+- Lightness: monotone PCHIP through the shade 50, 500 and 900 anchors, so L(t) always passes through lightest L, shade-500 L and darkest L.
+- Chroma: PCHIP through the endpoint anchors `baseChroma × lightestChromaBoost`, `baseChroma` at shade 500 and `baseChroma × darkestChromaBoost`, clamped to non-negative values.
+- Hue: PCHIP through `hue + lightestHueShift`, `hue` at shade 500 and `hue + darkestHueShift`, normalized to 0–360°.
+- Lightest shade range: 0.90–0.99 (default 0.97). Shade 500 range: 0.08–0.99, clamped between the endpoints (default 0.55). Darkest range: 0.08–0.80 (default 0.22), allowing bright palettes to keep a lighter 900 shade like the reference.
+- Endpoint chroma boost range: 0–5 (defaults 0.15 for shade 50 and 0.8 for shade 900). Endpoint hue shift range: −45°–45° (default 0°).
 - Out-of-gamut colors reduce chroma until displayable in sRGB, preserving hue and lightness.
 - Swatch labels show shade number, lightness as a percentage, and RGB hex.
 
 ## UI & Interaction
 - Light mode is the default; theme persists in localStorage.
-- Editor defaults: hue 220°, chroma 0.12, lightest 0.97, middle 0.55, darkest 0.22.
-- Chroma slider range: 0–0.4. Lightest range: 0.90–0.99. Middle range: 0.08–0.99. Darkest range: 0.08–0.80.
+- Editor defaults: hue 220°, chroma 0.12, shade-500 lightness 0.55, lightest 0.97 with chroma boost 0.15 and hue shift 0°, darkest 0.22 with chroma boost 0.8 and hue shift 0°.
+- Chroma slider range: 0–0.4. Shade 500 range: 0.08–0.99. Lightest range: 0.90–0.99. Darkest range: 0.08–0.80. Chroma boost range: 0–5. Hue shift range: −45°–45°.
+- The editor groups the controls into Base color, Lightest shade · 50 and Darkest shade · 900.
 - Each slider has a label, a compact range hint and a hover/focus tooltip explaining what the control does.
 - First visit without a URL query parameter or stored palette state is seeded with the built-in default palettes.
 - After an explicit Remove all, the empty palette list is persisted and is not re-seeded.
@@ -84,7 +88,7 @@ You may look at the files in the `reference` folder to get some ideas.
 - Remove all clears the entire list after confirmation, allowing an empty starting set.
 - The empty state offers a Restore default palettes action.
 - On small screens (≤600px) the intro copy and "Create a palette" heading are hidden and spacing, type and controls are compacted so the editor and preview stay visible with minimal scrolling.
-- On small screens Hue and Chroma each take a full row, while Lightest, Shade 500 and Darkest share a single three-column row.
+- On small screens Hue, Chroma and Shade 500 each take a full row, while the three controls of each shade endpoint share a single three-column row.
 - On small screens the swatch strip stays on one line in a ten-column grid without horizontal scrolling; only the shade number is shown, with lightness and RGB hex hidden.
 - On screens ≤720px the palette Edit and Delete actions are icon-only, remain in the top-right of each palette card, and keep a 44×44px touch target.
 - The page never scrolls horizontally on small screens; hidden tooltips are removed from layout and horizontal overflow is clipped.
@@ -92,7 +96,8 @@ You may look at the files in the `reference` folder to get some ideas.
 
 ## Storage & URL
 - Palettes and theme persist in localStorage.
-- Palettes are encoded as URL-safe base64 of compact CSV lines in a query parameter: `hue,chroma,lightest,middle,darkest,name`, one palette per line.
+- Palettes are encoded as URL-safe base64 of compact CSV lines in a query parameter: `hue,chroma,shade500,lightest,lightestChromaBoost,lightestHueShift,darkest,darkestChromaBoost,darkestHueShift,name`, one palette per line.
+- Legacy five-value CSV lines (`hue,chroma,lightest,middle,darkest,name`) are still decoded; the old middle value becomes shade-500 lightness and the endpoint settings use the defaults.
 - Legacy JSON URL payloads are still decoded: seven-value tuples with lightCurve/darkCurve, six-value tuples/objects with curve, and four-value tuples/objects with gamma are migrated by computing the shade-500 lightness from the old model.
 - Legacy four-value tuples use the default lightest and darkest endpoints when migrating.
 - The query parameter updates on save, delete, and reorder, including when the app runs from `file://`, so the current palette set can be bookmarked locally.
@@ -100,7 +105,7 @@ You may look at the files in the `reference` folder to get some ideas.
 - Legacy empty stored lists without the initialization marker are re-seeded with the default palettes; explicit empty lists saved afterwards are preserved.
 - On load, a valid URL query parameter wins over localStorage; otherwise stored palettes are used; only when neither exists are the default palettes seeded.
 - Malformed URL or localStorage data falls back gracefully.
-- Default palettes are a built-in set of 16 palettes with hue, shade-500 chroma and lightness anchors at 50, 500 and 900; hidden hue and chroma profiles supply the remaining shades.
+- Default palettes are a built-in set of 16 palettes with hue, shade-500 chroma and lightness, plus lightness, chroma boost and hue shift settings for the 50 and 900 endpoints.
 
 ## Distribution
 - `npm run build` produces a single self-contained `dist/index.html` with CSS, JS and the favicon inlined.

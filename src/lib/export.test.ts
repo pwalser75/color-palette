@@ -12,9 +12,13 @@ function makePalette(
     name,
     hue: 220,
     chroma: 0.12,
+    shade500: 0.55,
     lightest: 0.97,
-    middle: 0.55,
+    lightestChromaBoost: 0.15,
+    lightestHueShift: 0,
     darkest: 0.22,
+    darkestChromaBoost: 0.8,
+    darkestHueShift: 0,
     ...overrides,
   }
 }

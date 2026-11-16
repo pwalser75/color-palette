@@ -1,4 +1,4 @@
-import type { Palette, PaletteDraft } from '../types'
+import type { Palette, PaletteDraft, PaletteValues } from '../types'
 import { DEFAULT_VALUES, LIMITS, clampValue, normalizeHue } from './color'
 
 export const MAX_NAME_LENGTH = 60
@@ -19,12 +19,7 @@ export function nameKey(name: string): string {
   return normalizeName(name).toLowerCase()
 }
 
-function normalizeValues(
-  draft: Pick<
-    PaletteDraft,
-    'hue' | 'chroma' | 'lightest' | 'middle' | 'darkest'
-  >,
-) {
+function normalizeValues(draft: PaletteValues): PaletteValues {
   const lightest = clampValue(
     draft.lightest,
     LIMITS.lightest.min,
@@ -39,13 +34,33 @@ function normalizeValues(
   return {
     hue: clampValue(normalizeHue(draft.hue), LIMITS.hue.min, LIMITS.hue.max),
     chroma: clampValue(draft.chroma, LIMITS.chroma.min, LIMITS.chroma.max),
+    shade500: clampValue(
+      draft.shade500,
+      Math.max(LIMITS.shade500.min, darkest + 0.005),
+      Math.min(LIMITS.shade500.max, lightest - 0.005),
+    ),
     lightest,
-    middle: clampValue(
-      draft.middle,
-      Math.max(LIMITS.middle.min, darkest + 0.005),
-      Math.min(LIMITS.middle.max, lightest - 0.005),
+    lightestChromaBoost: clampValue(
+      draft.lightestChromaBoost,
+      LIMITS.lightestChromaBoost.min,
+      LIMITS.lightestChromaBoost.max,
+    ),
+    lightestHueShift: clampValue(
+      draft.lightestHueShift,
+      LIMITS.lightestHueShift.min,
+      LIMITS.lightestHueShift.max,
     ),
     darkest,
+    darkestChromaBoost: clampValue(
+      draft.darkestChromaBoost,
+      LIMITS.darkestChromaBoost.min,
+      LIMITS.darkestChromaBoost.max,
+    ),
+    darkestHueShift: clampValue(
+      draft.darkestHueShift,
+      LIMITS.darkestHueShift.min,
+      LIMITS.darkestHueShift.max,
+    ),
   }
 }
 
@@ -108,6 +123,21 @@ function toFiniteNumber(value: unknown): number | null {
 
 function entryToRecord(entry: unknown): Record<string, unknown> | null {
   if (Array.isArray(entry)) {
+    if (entry.length === 10) {
+      return {
+        name: entry[0],
+        hue: entry[1],
+        chroma: entry[2],
+        shade500: entry[3],
+        lightest: entry[4],
+        lightestChromaBoost: entry[5],
+        lightestHueShift: entry[6],
+        darkest: entry[7],
+        darkestChromaBoost: entry[8],
+        darkestHueShift: entry[9],
+      }
+    }
+
     if (entry.length === 7 && entry[6] === 'a5') {
       return {
         name: entry[0],
@@ -171,8 +201,9 @@ function paletteFromEntry(entry: unknown): Palette | null {
   const name = typeof record.name === 'string' ? normalizeName(record.name) : ''
   const hue = toFiniteNumber(record.hue)
   const chroma = toFiniteNumber(record.chroma)
-  const lightest = toFiniteNumber(record.lightest)
   const middle = toFiniteNumber(record.middle)
+  const shade500 = toFiniteNumber(record.shade500) ?? middle
+  const lightest = toFiniteNumber(record.lightest)
   const darkest = toFiniteNumber(record.darkest)
   const lightCurve = toFiniteNumber(record.lightCurve)
   const darkCurve = toFiniteNumber(record.darkCurve)
@@ -183,10 +214,32 @@ function paletteFromEntry(entry: unknown): Palette | null {
     return null
   }
 
-  let values: ReturnType<typeof normalizeValues>
+  const endpointDefaults = {
+    lightestChromaBoost:
+      toFiniteNumber(record.lightestChromaBoost) ??
+      DEFAULT_VALUES.lightestChromaBoost,
+    lightestHueShift:
+      toFiniteNumber(record.lightestHueShift) ??
+      DEFAULT_VALUES.lightestHueShift,
+    darkestChromaBoost:
+      toFiniteNumber(record.darkestChromaBoost) ??
+      DEFAULT_VALUES.darkestChromaBoost,
+    darkestHueShift:
+      toFiniteNumber(record.darkestHueShift) ??
+      DEFAULT_VALUES.darkestHueShift,
+  }
 
-  if (lightest !== null && middle !== null && darkest !== null) {
-    values = normalizeValues({ hue, chroma, lightest, middle, darkest })
+  let values: PaletteValues
+
+  if (shade500 !== null && lightest !== null && darkest !== null) {
+    values = normalizeValues({
+      hue,
+      chroma,
+      shade500,
+      lightest,
+      darkest,
+      ...endpointDefaults,
+    })
   } else {
     const legacyLightCurve = lightCurve ?? curve ?? gamma
     const legacyDarkCurve = darkCurve ?? curve ?? gamma
@@ -201,14 +254,15 @@ function paletteFromEntry(entry: unknown): Palette | null {
     values = normalizeValues({
       hue,
       chroma,
-      lightest: baseLightest,
-      middle: legacyMiddleLightness(
+      shade500: legacyMiddleLightness(
         baseLightest,
         baseDarkest,
         legacyLightCurve,
         legacyDarkCurve,
       ),
+      lightest: baseLightest,
       darkest: baseDarkest,
+      ...endpointDefaults,
     })
   }
 
@@ -252,9 +306,19 @@ export function sanitizePaletteList(input: unknown): Palette[] | null {
 
 export function serializePalettes(palettes: Palette[]): string {
   return palettes
-    .map(
-      (palette) =>
-        `${palette.hue},${palette.chroma},${palette.lightest},${palette.middle},${palette.darkest},${palette.name}`,
+    .map((palette) =>
+      [
+        palette.hue,
+        palette.chroma,
+        palette.shade500,
+        palette.lightest,
+        palette.lightestChromaBoost,
+        palette.lightestHueShift,
+        palette.darkest,
+        palette.darkestChromaBoost,
+        palette.darkestHueShift,
+        palette.name,
+      ].join(','),
     )
     .join('\n')
 }

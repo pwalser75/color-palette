@@ -37,11 +37,14 @@ export function encodePalettes(palettes: Palette[]): string {
   return encodeBase64Url(serializePalettes(palettes))
 }
 
-function parseCsvLine(line: string): string[] | null {
+function parseCsvFields(
+  line: string,
+  numericFieldCount: number,
+): string[] | null {
   const fields: string[] = []
   let rest = line
 
-  for (let index = 0; index < 5; index += 1) {
+  for (let index = 0; index < numericFieldCount; index += 1) {
     const comma = rest.indexOf(',')
     if (comma < 0) {
       return null
@@ -53,6 +56,97 @@ function parseCsvLine(line: string): string[] | null {
 
   fields.push(rest)
   return fields
+}
+
+function parseNumbers(fields: string[]): number[] | null {
+  if (fields.some((field) => field.trim() === '')) {
+    return null
+  }
+
+  const numbers = fields.map(Number)
+  return numbers.every(Number.isFinite) ? numbers : null
+}
+
+function parseCsvEntry(line: string): Record<string, unknown> | null {
+  const currentFields = parseCsvFields(line, 9)
+
+  if (currentFields) {
+    const [
+      hue,
+      chroma,
+      shade500,
+      lightest,
+      lightestChromaBoost,
+      lightestHueShift,
+      darkest,
+      darkestChromaBoost,
+      darkestHueShift,
+      name,
+    ] = currentFields
+    const numbers = parseNumbers([
+      hue,
+      chroma,
+      shade500,
+      lightest,
+      lightestChromaBoost,
+      lightestHueShift,
+      darkest,
+      darkestChromaBoost,
+      darkestHueShift,
+    ])
+
+    if (numbers) {
+      const [
+        hueValue,
+        chromaValue,
+        shade500Value,
+        lightestValue,
+        lightestChromaBoostValue,
+        lightestHueShiftValue,
+        darkestValue,
+        darkestChromaBoostValue,
+        darkestHueShiftValue,
+      ] = numbers
+
+      return {
+        name,
+        hue: hueValue,
+        chroma: chromaValue,
+        shade500: shade500Value,
+        lightest: lightestValue,
+        lightestChromaBoost: lightestChromaBoostValue,
+        lightestHueShift: lightestHueShiftValue,
+        darkest: darkestValue,
+        darkestChromaBoost: darkestChromaBoostValue,
+        darkestHueShift: darkestHueShiftValue,
+      }
+    }
+  }
+
+  const legacyFields = parseCsvFields(line, 5)
+
+  if (!legacyFields) {
+    return null
+  }
+
+  const [hue, chroma, lightest, middle, darkest, name] = legacyFields
+  const numbers = parseNumbers([hue, chroma, lightest, middle, darkest])
+
+  if (!numbers) {
+    return null
+  }
+
+  const [hueValue, chromaValue, lightestValue, middleValue, darkestValue] =
+    numbers
+
+  return {
+    name,
+    hue: hueValue,
+    chroma: chromaValue,
+    lightest: lightestValue,
+    middle: middleValue,
+    darkest: darkestValue,
+  }
 }
 
 export function decodePalettes(value: string): Palette[] | null {
@@ -78,37 +172,13 @@ export function decodePalettes(value: string): Palette[] | null {
       continue
     }
 
-    const fields = parseCsvLine(line.trim())
-    if (!fields) {
+    const entry = parseCsvEntry(line.trim())
+
+    if (!entry) {
       return null
     }
 
-    const [hue, chroma, lightest, middle, darkest, name] = fields
-    const numbers = [hue, chroma, lightest, middle, darkest]
-
-    if (numbers.some((field) => field.trim() === '')) {
-      return null
-    }
-
-    const [hueValue, chromaValue, lightestValue, middleValue, darkestValue] =
-      numbers.map(Number)
-
-    if (
-      ![hueValue, chromaValue, lightestValue, middleValue, darkestValue].every(
-        Number.isFinite,
-      )
-    ) {
-      return null
-    }
-
-    entries.push({
-      name,
-      hue: hueValue,
-      chroma: chromaValue,
-      lightest: lightestValue,
-      middle: middleValue,
-      darkest: darkestValue,
-    })
+    entries.push(entry)
   }
 
   return sanitizePaletteList(entries)

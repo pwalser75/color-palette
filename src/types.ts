@@ -1,20 +1,22 @@
-export interface Palette {
-  id: string
-  name: string
+export interface PaletteValues {
   hue: number
   chroma: number
+  shade500: number
   lightest: number
-  middle: number
+  lightestChromaBoost: number
+  lightestHueShift: number
   darkest: number
+  darkestChromaBoost: number
+  darkestHueShift: number
 }
 
-export interface PaletteDraft {
+export interface Palette extends PaletteValues {
+  id: string
   name: string
-  hue: number
-  chroma: number
-  lightest: number
-  middle: number
-  darkest: number
+}
+
+export interface PaletteDraft extends PaletteValues {
+  name: string
 }
 
 export interface Swatch {

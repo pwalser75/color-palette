@@ -1,6 +1,6 @@
 # idx Color Palette Generator
 
-A browser-only color palette generator built around the OKLCH color model. Pick a hue and chroma, tune the lightness anchors at shades 50, 500 and 900, and get a ten-step palette with a live preview.
+A browser-only color palette generator built around the OKLCH color model. Pick a hue, a base chroma and the lightness of shade 500, then tune the lightness, chroma boost and hue shift of the lightest and darkest ends to get a ten-step palette with a live preview.
 
 ![idx Color Palette Generator](screenshot.png)
 
@@ -8,9 +8,11 @@ A browser-only color palette generator built around the OKLCH color model. Pick 
 
 - OKLCH-based palettes with sRGB gamut mapping.
 - Live preview of shades 50–900, with copy-to-clipboard hex values.
-- Adjustable hue, chroma at shade 500, and lightness anchors for shades 50, 500 and 900.
-- Hidden hue drift and a chroma taper reproduce the Tailwind-like ramp between the anchors.
+- Adjustable hue, base chroma and shade-500 lightness.
+- Separate lightness, chroma boost (0–5× the base chroma) and hue shift (−45°–45°) controls for shades 50 and 900.
+- Shape-preserving interpolation carries lightness, chroma and hue smoothly between the base and endpoint anchors.
 - Save, edit, delete, and drag-and-drop reorder palettes.
+- Reset values restores a saved palette’s stored values while editing; new palettes reset to the editor defaults.
 - Palettes persist in `localStorage`.
 - The palette collection is also encoded in the page URL for sharing.
 - Light and dark themes, with the selected theme persisted.
@@ -60,13 +62,14 @@ The page URL is kept in sync with the palette set on save, delete, and reorder, 
 ## Usage
 
 1. Enter a name for the palette.
-2. Adjust Hue and Chroma, then shape the ramp with the Lightest shade, Shade 500, and Darkest shade controls.
+2. Adjust Hue, Chroma and Shade 500 lightness, then shape the ends with the lightness, chroma boost and hue shift controls for shades 50 and 900.
 3. Click any swatch to copy its hex value.
 4. Save the palette to add it to the collection below.
-5. Edit, delete, or drag palettes to reorder them.
-6. Use **SVG** or **CSS** in the collection header to open an export of all palettes in a new tab.
+5. When editing a saved palette, use **Reset values** to return the controls to the values stored before editing.
+6. Edit, delete, or drag palettes to reorder them.
+7. Use **SVG** or **CSS** in the collection header to open an export of all palettes in a new tab.
 
-Sharing the current page URL carries the saved palette list to whoever opens the link. The URL payload is compact CSV (`hue,chroma,lightest,middle,darkest,name`, one palette per line) encoded as URL-safe base64.
+Sharing the current page URL carries the saved palette list to whoever opens the link. The URL payload is compact CSV (`hue,chroma,shade500,lightest,lightestChromaBoost,lightestHueShift,darkest,darkestChromaBoost,darkestHueShift,name`, one palette per line) encoded as URL-safe base64.
 
 ## Project structure
 
@@ -91,3 +94,4 @@ dist/                     Production build output
 - All data stays in the browser. There is no backend.
 - Palettes are matched by trimmed, case-insensitive name; saving with an existing name updates it.
 - Out-of-gamut colors lose chroma until they are displayable in sRGB, preserving hue and lightness.
+- Older five-value CSV URLs, curve/gamma JSON payloads, and stored palettes from the previous model are migrated automatically.

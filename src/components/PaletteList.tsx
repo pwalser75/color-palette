@@ -69,7 +69,7 @@ function PaletteRow({
           <p>
             <span>H {Math.round(palette.hue)}°</span>
             <span>C {palette.chroma.toFixed(3)}</span>
-            <span>L {Math.round(palette.lightest * 100)}/{Math.round(palette.middle * 100)}/{Math.round(palette.darkest * 100)}%</span>
+            <span>L {Math.round(palette.lightest * 100)}/{Math.round(palette.shade500 * 100)}/{Math.round(palette.darkest * 100)}%</span>
           </p>
         </div>
 

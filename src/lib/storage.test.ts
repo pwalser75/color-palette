@@ -17,9 +17,13 @@ const palette: Palette = {
   name: 'Océan bleu',
   hue: 220,
   chroma: 0.12,
+  shade500: 0.55,
   lightest: 0.97,
-  middle: 0.55,
+  lightestChromaBoost: 0.15,
+  lightestHueShift: 0,
   darkest: 0.22,
+  darkestChromaBoost: 0.8,
+  darkestHueShift: 0,
 }
 
 let data: Map<string, string>
@@ -90,7 +94,29 @@ describe('palette URL encoding', () => {
     expect(decoded).toHaveLength(1)
     expect(decoded?.[0].lightest).toBe(0.97)
     expect(decoded?.[0].darkest).toBe(0.22)
-    expect(decoded?.[0].middle).toBeCloseTo(0.541, 2)
+    expect(decoded?.[0].shade500).toBeCloseTo(0.541, 2)
+    expect(decoded?.[0].lightestChromaBoost).toBe(0.15)
+    expect(decoded?.[0].darkestChromaBoost).toBe(0.8)
+  })
+
+  it('decodes legacy five-value CSV lines', () => {
+    const legacyCsv = '220,0.12,0.97,0.55,0.22,Legacy'
+    const encoded = btoa(legacyCsv)
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/g, '')
+
+    const decoded = decodePalettes(encoded)
+
+    expect(decoded).toHaveLength(1)
+    expect(decoded?.[0].name).toBe('Legacy')
+    expect(decoded?.[0].shade500).toBe(0.55)
+    expect(decoded?.[0].lightest).toBe(0.97)
+    expect(decoded?.[0].darkest).toBe(0.22)
+    expect(decoded?.[0].lightestChromaBoost).toBe(0.15)
+    expect(decoded?.[0].lightestHueShift).toBe(0)
+    expect(decoded?.[0].darkestChromaBoost).toBe(0.8)
+    expect(decoded?.[0].darkestHueShift).toBe(0)
   })
 
   it('returns null for invalid encoding or payloads', () => {
@@ -133,7 +159,9 @@ describe('local storage', () => {
 
     expect(restored?.[0].lightest).toBe(0.97)
     expect(restored?.[0].darkest).toBe(0.22)
-    expect(restored?.[0].middle).toBeCloseTo(0.513, 2)
+    expect(restored?.[0].shade500).toBeCloseTo(0.513, 2)
+    expect(restored?.[0].lightestChromaBoost).toBe(0.15)
+    expect(restored?.[0].darkestChromaBoost).toBe(0.8)
   })
 
   it('defaults to light mode and persists dark mode', () => {
