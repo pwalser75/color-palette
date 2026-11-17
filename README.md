@@ -17,8 +17,14 @@ A browser-only color palette generator built around the OKLCH color model. Pick 
 - The palette collection is also encoded in the page URL for sharing.
 - Light and dark themes, with the selected theme persisted.
 - Compact mobile layout: editor and preview fit small screens, and all shades stay on one line without horizontal scrolling.
-- Restore default palettes from the empty state.
+- Ships with 16 OKLCH-tuned default palettes (Red through Warm Gray), restorable from the empty state.
 - Export the whole collection as an SVG sheet or a CSS file, opened in a new tab.
+
+## Default palettes
+
+The collection starts with 16 OKLCH-tuned palettes: Red, Orange, Amber, Yellow, Lime, Green, Teal, Cyan, Blue, Indigo, Purple, Pink, Brown, Cold Gray, Gray and Warm Gray. Each one sets its own endpoint lightness, chroma boost and hue shift so the ramps keep their hue character as they approach white and black.
+
+![Default palettes](screenshot-palettes.png)
 
 ## Tech stack
 
