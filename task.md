@@ -75,7 +75,7 @@ You may look at the files in the `reference` folder to get some ideas.
 - Light mode is the default; theme persists in localStorage.
 - Editor defaults: hue 220°, chroma 0.12, shade-500 lightness 0.55, lightest 0.97 with chroma boost 0.15 and hue shift 0°, darkest 0.22 with chroma boost 0.8 and hue shift 0°.
 - Chroma slider range: 0–0.4. Shade 500 range: 0.08–0.99. Lightest range: 0.90–0.99. Darkest range: 0.08–0.80. Chroma boost range: 0–5. Hue shift range: −45°–45°.
-- The editor groups the controls into Base color, Lightest shade · 50 and Darkest shade · 900.
+- The editor groups the controls into Base color, Lightest shade · 50 and Darkest shade · 900. Within both shade groups the controls are ordered hue shift, chroma boost, lightness so they line up with the hue, chroma and lightness controls of the base color group.
 - Each slider has a label, a compact range hint and a hover/focus tooltip explaining what the control does.
 - First visit without a URL query parameter or stored palette state is seeded with the built-in default palettes.
 - After an explicit Remove all, the empty palette list is persisted and is not re-seeded.
@@ -89,7 +89,9 @@ You may look at the files in the `reference` folder to get some ideas.
 - The empty state offers a Restore default palettes action.
 - On small screens (≤600px) the intro copy and "Create a palette" heading are hidden and spacing, type and controls are compacted so the editor and preview stay visible with minimal scrolling.
 - On small screens Hue, Chroma and Shade 500 each take a full row, while the three controls of each shade endpoint share a single three-column row.
-- On small screens the swatch strip stays on one line in a ten-column grid without horizontal scrolling; only the shade number is shown, with lightness and RGB hex hidden.
+- On small screens the shade endpoint number inputs are hidden and only their sliders remain, the color name label is dropped in favor of a bold input with a "Color name" placeholder, and the Save palette button keeps its content width instead of stretching.
+- On screens ≤720px the swatch strips switch to a ten-column grid so the preview and every palette row are fully visible without horizontal scrolling; on ≤600px only the shade number is shown, with lightness and RGB hex hidden.
+- On screens ≤720px the editor number inputs are narrowed and the field gaps reduced so the sliders keep a usable width in the three-column layout.
 - On screens ≤720px the palette Edit and Delete actions are icon-only, remain in the top-right of each palette card, and keep a 44×44px touch target.
 - The page never scrolls horizontally on small screens; hidden tooltips are removed from layout and horizontal overflow is clipped.
 - Clicking any swatch copies its hex value to the clipboard and shows a toast.

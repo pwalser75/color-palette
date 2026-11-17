@@ -68,7 +68,8 @@ export function PaletteEditor({
           type="text"
           value={draft.name}
           maxLength={MAX_NAME_LENGTH}
-          placeholder="e.g. Ocean blue"
+          placeholder="Color name"
+          aria-label="Color name"
           autoComplete="off"
           onChange={(event) => onChange({ name: event.target.value })}
         />
@@ -134,6 +135,32 @@ export function PaletteEditor({
           <div className="field-group-fields">
             <RangeField
               className="field--endpoint"
+              label="Hue shift"
+              value={draft.lightestHueShift}
+              min={LIMITS.lightestHueShift.min}
+              max={LIMITS.lightestHueShift.max}
+              step={LIMITS.lightestHueShift.step}
+              suffix="°"
+              hint="−45–45°"
+              description="Rotates the hue at shade 50 relative to the base hue. Negative values turn counter-clockwise; positive values turn clockwise."
+              onChange={(lightestHueShift) => onChange({ lightestHueShift })}
+            />
+            <RangeField
+              className="field--endpoint"
+              label="Chroma boost"
+              value={draft.lightestChromaBoost}
+              min={LIMITS.lightestChromaBoost.min}
+              max={LIMITS.lightestChromaBoost.max}
+              step={LIMITS.lightestChromaBoost.step}
+              suffix="×"
+              hint="0–5×"
+              description="Multiplies the base chroma at shade 50. 0 produces a neutral light shade, 1 matches the shade 500 chroma and higher values push past it."
+              onChange={(lightestChromaBoost) =>
+                onChange({ lightestChromaBoost })
+              }
+            />
+            <RangeField
+              className="field--endpoint"
               label="Lightness"
               value={draft.lightest}
               min={LIMITS.lightest.min}
@@ -152,32 +179,6 @@ export function PaletteEditor({
                 })
               }
             />
-            <RangeField
-              className="field--endpoint"
-              label="Chroma boost"
-              value={draft.lightestChromaBoost}
-              min={LIMITS.lightestChromaBoost.min}
-              max={LIMITS.lightestChromaBoost.max}
-              step={LIMITS.lightestChromaBoost.step}
-              suffix="×"
-              hint="0–5×"
-              description="Multiplies the base chroma at shade 50. 0 produces a neutral light shade, 1 matches the shade 500 chroma and higher values push past it."
-              onChange={(lightestChromaBoost) =>
-                onChange({ lightestChromaBoost })
-              }
-            />
-            <RangeField
-              className="field--endpoint"
-              label="Hue shift"
-              value={draft.lightestHueShift}
-              min={LIMITS.lightestHueShift.min}
-              max={LIMITS.lightestHueShift.max}
-              step={LIMITS.lightestHueShift.step}
-              suffix="°"
-              hint="−45–45°"
-              description="Rotates the hue at shade 50 relative to the base hue. Negative values turn counter-clockwise; positive values turn clockwise."
-              onChange={(lightestHueShift) => onChange({ lightestHueShift })}
-            />
           </div>
         </div>
 
@@ -190,6 +191,32 @@ export function PaletteEditor({
             Darkest shade · 900
           </p>
           <div className="field-group-fields">
+            <RangeField
+              className="field--endpoint"
+              label="Hue shift"
+              value={draft.darkestHueShift}
+              min={LIMITS.darkestHueShift.min}
+              max={LIMITS.darkestHueShift.max}
+              step={LIMITS.darkestHueShift.step}
+              suffix="°"
+              hint="−45–45°"
+              description="Rotates the hue at shade 900 relative to the base hue. Negative values turn counter-clockwise; positive values turn clockwise."
+              onChange={(darkestHueShift) => onChange({ darkestHueShift })}
+            />
+            <RangeField
+              className="field--endpoint"
+              label="Chroma boost"
+              value={draft.darkestChromaBoost}
+              min={LIMITS.darkestChromaBoost.min}
+              max={LIMITS.darkestChromaBoost.max}
+              step={LIMITS.darkestChromaBoost.step}
+              suffix="×"
+              hint="0–5×"
+              description="Multiplies the base chroma at shade 900. 0 produces a neutral dark shade, 1 matches the shade 500 chroma and higher values push past it."
+              onChange={(darkestChromaBoost) =>
+                onChange({ darkestChromaBoost })
+              }
+            />
             <RangeField
               className="field--endpoint"
               label="Lightness"
@@ -209,32 +236,6 @@ export function PaletteEditor({
                   ),
                 })
               }
-            />
-            <RangeField
-              className="field--endpoint"
-              label="Chroma boost"
-              value={draft.darkestChromaBoost}
-              min={LIMITS.darkestChromaBoost.min}
-              max={LIMITS.darkestChromaBoost.max}
-              step={LIMITS.darkestChromaBoost.step}
-              suffix="×"
-              hint="0–5×"
-              description="Multiplies the base chroma at shade 900. 0 produces a neutral dark shade, 1 matches the shade 500 chroma and higher values push past it."
-              onChange={(darkestChromaBoost) =>
-                onChange({ darkestChromaBoost })
-              }
-            />
-            <RangeField
-              className="field--endpoint"
-              label="Hue shift"
-              value={draft.darkestHueShift}
-              min={LIMITS.darkestHueShift.min}
-              max={LIMITS.darkestHueShift.max}
-              step={LIMITS.darkestHueShift.step}
-              suffix="°"
-              hint="−45–45°"
-              description="Rotates the hue at shade 900 relative to the base hue. Negative values turn counter-clockwise; positive values turn clockwise."
-              onChange={(darkestHueShift) => onChange({ darkestHueShift })}
             />
           </div>
         </div>
